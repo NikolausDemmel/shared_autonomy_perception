@@ -64,12 +64,8 @@
 
   </group> <!-- end "if use_grabcut" -->
   <group unless="$(arg use_grabcut)">
-    <!-- TODO: launch everything required for the ORK tabletop segmentation -->
-
-    <!-- TODO: This doesn't work, b/c the detection node barfs at the additional arguments added by roslaunch-->
-    <!--
-    <node name="ork_tabletop_detection" pkg="object_recognition_core" type="detection" args="-c $(find object_recognition_tabletop)/conf/detection.object.ros.ork"/>-->
-    <node pkg="ork_tabletop_actionlib_server" type="ork_tabletop_actionlib_server.py" name="ork_tabletop"/>
+    <node pkg="ork_tabletop_actionlib_server" type="monitor_ork.py" name="ork_tabletop_detection"/>
+    <node pkg="ork_tabletop_actionlib_server" type="ork_tabletop_actionlib_server.py" name="ork_tabletop" launch-prefix="xterm -e"/>
   </group>
 
 
