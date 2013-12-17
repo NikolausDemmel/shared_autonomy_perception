@@ -9,7 +9,9 @@
   <arg name="use_im" default="false"/>
   <arg name="use_grasp_db" default="false"/>
 
-  <machine name="c1" address="c1" env-loader="/opt/ros/hydro/env.sh"/>
+  <!-- TODO: I'm not sure the right way to handle the env-loader for packages that are
+  installed in a particular user's workspace -->
+  <machine name="c1" address="c1" env-loader="/home/lil1pal/catkin_hydro/devel/env.sh"/>
 
   <!-- Export arguments for use by the actual clear_table state machine 
        I'm doing this here s.t. it's possible to restart the state machine w/o a launch file -->
@@ -64,9 +66,9 @@
   <group unless="$(arg use_grabcut)">
     <!-- TODO: launch everything required for the ORK tabletop segmentation -->
 
-    <!-- TODO: this requires having the ORK code compiled in more accounts than just Dejan's...
-    <node machine="c1" name="ork_tabletop_detection" pkg="object_recognition_core" type="detection" args="-c `rospack find object_recognition_tabletop`/conf/detection.object.ros.ork"/>
--->
+    <!-- TODO: This doesn't work, b/c the detection node barfs at the additional arguments added by roslaunch-->
+    <!--
+    <node name="ork_tabletop_detection" pkg="object_recognition_core" type="detection" args="-c $(find object_recognition_tabletop)/conf/detection.object.ros.ork"/>-->
     <node pkg="ork_tabletop_actionlib_server" type="ork_tabletop_actionlib_server.py" name="ork_tabletop"/>
   </group>
 
