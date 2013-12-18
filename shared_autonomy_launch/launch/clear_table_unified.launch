@@ -59,6 +59,7 @@
       </include>        
     </group>
     <group unless="$(arg use_im)">
+      <node pkg="mjpeg_server" type="mjpeg_server" name="mjpeg_server"/>
       <node pkg="rosbridge_server" type="rosbridge_websocket" name="rosbridge"/>
     </group>
 
